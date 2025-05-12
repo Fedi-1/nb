@@ -1,0 +1,112 @@
+<div class="dashboard-container">
+    <aside class="sidebar">
+        <div class="profile">
+            <img src="user.jpg" alt="Profile" class="profile-img">
+            <h3 class="admin">Administrateur</h3>
+        </div>
+
+        <nav class="nav-menu">
+            <div class="nav-item-container">
+                <a (click)="toggleUsersDropdown()" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Utilisateurs</span>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <div class="dropdown-menu" *ngIf="isUsersDropdownOpen">
+                    <a routerLink="/clients" class="dropdown-item">
+                        <i class="fas fa-user-friends"></i>
+                        Clients
+                    </a>
+                    <a routerLink="/commercants" class="dropdown-item">
+                        <i class="fas fa-store"></i>
+                        Commerçants
+                    </a>
+                    <a routerLink="/livreurs" class="dropdown-item">
+                        <i class="fas fa-truck"></i>
+                        Livreurs
+                    </a>
+                </div>
+
+                <a routerLink="/commandes" class="nav-item">
+                    <i class="fas fa-shopping-cart"></i>
+                    Commandes
+                </a>
+                <a routerLink="/dashboard" class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    Statistiques
+                </a>
+                <a routerLink="/settingsowner" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    Paramètres
+                </a>
+
+
+                <div class="logout">
+                    <a routerLink="/login" class="nav-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Déconnexion
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="clients-container">
+            <div class="header">
+                <h1>Liste De Clients</h1>
+                <div class="header-actions">
+                    <div class="search-container">
+                        <input type="text" placeholder="Recherche client..." 
+                               [(ngModel)]="searchQuery"
+                               (keydown)="onSearchKeydown($event)"/>
+                        <button tabindex="0" (click)="searchClient()">Rechercher</button>
+                    </div>
+                    <button type="submit" class="add-button" (click)="addClient()">
+                        <i class="fas fa-plus"></i>
+                        Ajouter Nouveau Client
+                    </button>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Mot de Passe</th>
+                            <th>Email</th>
+                            <th>Âge</th>
+                            <th>Adresse</th>
+                            <th>Téléphone</th>
+                            <th>Code Postale</th>
+                            <th>Zip</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let client of clients">
+                            <td>{{ client.nom }}</td>
+                            <td>{{ client.prenom }}</td>
+                            <td>{{ client.motdepasse }}</td>
+                            <td>{{ client.email }}</td>
+                            <td>{{ client.age }}</td>
+                            <td>{{ client.adresse }}</td>
+                            <td>{{ client.tlf }}</td>
+                            <td>{{ client.codePostale }}</td>
+                            <td>{{ client.zip }}</td>
+                            <td class="actions">
+                                <button class="action-btn edit" (click)="editClient(client)">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </button>
+                                <button class="action-btn delete" (click)="deleteClient(client)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>

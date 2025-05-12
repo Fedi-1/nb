@@ -1,0 +1,75 @@
+<div class="container">
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="loading">
+    Loading statistics...
+  </div>
+
+  <!-- Dashboard Stats -->
+  <div *ngIf="dashboardStats && !isLoading" class="stats-section">
+    <h2>Dashboard Statistics</h2>
+    
+    <div class="summary-cards">
+      <div class="card">
+        <h3>Total Clients</h3>
+        <p>{{ dashboardStats.totalClients | number }}</p>
+      </div>
+      
+      <div class="card">
+        <h3>Total Orders</h3>
+        <p>{{ dashboardStats.totalOrders | number }}</p>
+      </div>
+      
+      <div class="card">
+        <h3>Total Revenue</h3>
+        <p>{{ dashboardStats.totalRevenue | currency:'USD':'symbol':'1.0-0' }}</p>
+      </div>
+    </div>
+
+    <!-- City Distribution -->
+    <div class="chart-container">
+      <h3>City Distribution</h3>
+      <div class="chart">
+        <div *ngFor="let city of sortedCities; let i = index" class="chart-item">
+          <div class="color-box" [style.background]="chartColors[i % chartColors.length]"></div>
+          <span class="city-name">{{ city[0] }}</span>
+          <span class="city-count">{{ city[1] | number }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Products -->
+    <div class="chart-container">
+      <h3>Top Products</h3>
+      <div class="chart">
+        <div *ngFor="let product of sortedProducts; let i = index" class="chart-item">
+          <div class="color-box" [style.background]="chartColors[i % chartColors.length]"></div>
+          <span class="product-name">{{ product.name }}</span>
+          <span class="product-count">{{ product.count | number }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Monthly Statistics -->
+  <div *ngIf="monthlyStats && !isLoading" class="stats-section">
+    <h2>Monthly Statistics ({{ currentYear }})</h2>
+    <div class="year-selector">
+      <input type="number" [(ngModel)]="currentYear" (change)="onYearChange()" min="2000" max="2100">
+    </div>
+    
+    <div class="monthly-bars">
+      <div *ngFor="let month of months; let i = index" class="month-bar">
+        <div class="bar-label">{{ month }}</div>
+        <div class="bar-container">
+          <div class="bar-fill" [style.width]="getBarWidth(i + 1)"></div>
+        </div>
+        <div class="bar-value">{{ getMonthCount(i + 1) | number }}</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="dashboard-container">
+    <aside class="sidebar">
+        <div class="profile">
+            <img src="user.jpg" alt="Profile" class="profile-img">
+            <h3 class="admin">Administrateur</h3>
+        </div>
+
+        <nav class="nav-menu">
+            <div class="nav-item-container">
+              <a href="#" (click)="toggleUsersDropdown()" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>Utilisateurs</span>
+                <i class="fas fa-chevron-down"></i>
+              </a>
+              <div class="dropdown-menu" *ngIf="isUsersDropdownOpen">
+                <a routerLink="/clients" class="dropdown-item">
+                  <i class="fas fa-user-friends"></i>
+                  <span>Clients</span>
+                </a>
+                <a routerLink="/commercants" class="dropdown-item">
+                  <i class="fas fa-store"></i>
+                  <span>Commerçants</span>
+                </a>
+                <a routerLink="/livreurs" class="dropdown-item">
+                  <i class="fas fa-truck"></i>
+                  <span>Livreurs</span>
+                </a>
+              </div>
+          
+              <a routerLink="/stats" class="nav-item">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Statistiques</span>
+              </a>
+              
+              <a routerLink="/parametres" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>Paramètres</span>
+              </a>
+          
+              <div class="logout">
+                <a routerLink="/login" class="nav-item">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <span>Déconnexion</span>
+                </a>
+              </div>
+            </div>
+          </nav>          
+    </aside>
+
